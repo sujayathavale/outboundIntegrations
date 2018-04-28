@@ -1,3 +1,12 @@
 ﻿{
-
+  "PostPolicySettings": {
+    "PolicyCreated": {
+      "Uri": "https://becomeamember.westus2-1.eventgrid.azure.net/api/events",
+      "SasKey": "1Gt4m0Z/Wfws7xbzpkO1YAh0jbea//HysuZgPHiOwRk="
+    },
+    "PolicyRefunded": {
+      "Uri": "https://cancelmymembership.westus2-1.eventgrid.azure.net/api/events",
+      "SasKey": "hjLSWymmNw/WP+aXmXMKfOAA0JMtyakj3/mnrSJdTjY="
+    }
+  }
 }

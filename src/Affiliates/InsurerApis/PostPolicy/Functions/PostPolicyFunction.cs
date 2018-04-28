@@ -1,4 +1,5 @@
 ﻿using InsurerApis.Common.Functions;
+using InsurerApis.PostPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace InsurerApis.PostPolicy.Functions
     {
         private readonly HttpClient _httpClient;
         private readonly MemoryCache _memoryCache;
+        private readonly PostPolicySettings _postPolicySettings;
 
-        public PostPolicyFunction(HttpClient httpclient, MemoryCache memoryCache)
+        public PostPolicyFunction(HttpClient httpclient, MemoryCache memoryCache, PostPolicySettings postPolicySettings)
         {
             _httpClient = httpclient;
             _memoryCache = memoryCache;
+            _postPolicySettings = postPolicySettings;
         }
 
         public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
@@ -128,10 +131,10 @@ namespace InsurerApis.PostPolicy.Functions
                     }
             };
 
-            var requestUrl = $"https://becomeamember.westus2-1.eventgrid.azure.net/api/events";
+            var requestUrl = _postPolicySettings.PolicyCreated.Uri;
 
             _httpClient?.DefaultRequestHeaders.Accept.Clear();
-            _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", "1Gt4m0Z/Wfws7xbzpkO1YAh0jbea//HysuZgPHiOwRk=");
+            _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", _postPolicySettings.PolicyCreated.SaSKey);
 
             using (var message = await this._httpClient?.PostAsJsonAsync(requestUrl, body))
             {
@@ -165,9 +168,9 @@ namespace InsurerApis.PostPolicy.Functions
                     }
             };
 
-            var requestUrl = $"https://cancelmymembership.westus2-1.eventgrid.azure.net/api/events";
+            var requestUrl = _postPolicySettings.PolicyRefunded.Uri;
             _httpClient?.DefaultRequestHeaders.Accept.Clear();
-            _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", "hjLSWymmNw/WP+aXmXMKfOAA0JMtyakj3/mnrSJdTjY=");
+            _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", _postPolicySettings.PolicyRefunded.SaSKey);
 
             using (var message = await this._httpClient?.PostAsJsonAsync(requestUrl, body))
             {
