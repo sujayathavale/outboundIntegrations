@@ -16,7 +16,7 @@ namespace InsurerApis.GetPolicy.Handlers
     {
         public static IFunctionActivator FunctionActivator = new AutofacFunctionActivator(new GetPolicyModule());
 
-        [FunctionName("GetPolicy")]
+        [FunctionName("GetPolicyHandler")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "api/policy/{policyId:long}")]HttpRequestMessage req,
             TraceWriter log,

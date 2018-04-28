@@ -12,7 +12,7 @@ namespace InsurerApis.GetPolicy.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<GetPolicyAutofaqFunction>()
+            builder.RegisterType<GetPolicyFunction>()
                 .Named<IFunction>("GetPolicy").InstancePerLifetimeScope();
           
             builder.RegisterInstance(new HttpClient())

@@ -11,22 +11,24 @@ using System.Threading.Tasks;
 
 namespace InsurerApis.GetPolicy.Functions
 {
-    public class GetPolicyAutofaqFunction : IFunction
+    public class GetPolicyFunction : IFunction
     {
-        public GetPolicyAutofaqFunction()
+        public GetPolicyFunction()
         {            
         }
 
         public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
         {
+            object result = null;
+
             try
             {
-                log?.Info("GetPolicyAutofaqFunction invoked.");
+                log?.Info("GetPolicyFunction invoked.");
 
                 var model = payload as Models.GetPolicyFunctionModel;
 
                // some static representation for the policy
-               object result = await Task.FromResult(new[]
+               result = await Task.FromResult(new[]
                {
                     new {
                         id = model.PolicyId,
@@ -44,18 +46,18 @@ namespace InsurerApis.GetPolicy.Functions
                         },
                         dataVersion = "1.0"
                     }
-               });
-
-                return (TOutput)result;
+               });                
             }
             catch (Exception ex)
             {
                 // log error message
-                log?.Error($"Exception in function GetPolicyAutofaqFunction -> { ex.GetBaseException().Message }");
+                log?.Error($"Exception in function GetPolicyFunction -> { ex.GetBaseException().Message }");
                 
                 // bubble up exception, so that function handler can perform common error handling
                 throw;
-            }            
+            }
+
+            return (TOutput)result;
         }
     }
 }
