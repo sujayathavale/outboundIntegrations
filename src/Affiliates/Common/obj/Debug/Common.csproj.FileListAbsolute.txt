@@ -1,0 +1,6 @@
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\bin\Debug\Common.dll
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\bin\Debug\Common.pdb
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\obj\Debug\Common.dll
+C:\Users\Sujay\Source\GitHub\outboundIntegrations\src\Affiliates\Common\obj\Debug\Common.pdb
