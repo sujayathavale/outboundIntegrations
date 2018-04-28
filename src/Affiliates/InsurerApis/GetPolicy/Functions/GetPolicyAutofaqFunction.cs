@@ -1,4 +1,4 @@
-﻿using Common.Functions;
+﻿using InsurerApis.Common.Functions;
 using InsurerApis.GetPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
@@ -17,11 +17,11 @@ namespace InsurerApis.GetPolicy.Functions
         {            
         }
 
-        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload)
+        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
         {
             try
             {
-                //_log?.Info("GetPolicyAutofaqFunction invoked.");
+                log?.Info("GetPolicyAutofaqFunction invoked.");
 
                 var model = payload as Models.GetPolicyFunctionModel;
 
@@ -51,7 +51,7 @@ namespace InsurerApis.GetPolicy.Functions
             catch (Exception ex)
             {
                 // log error message
-                //_log?.Error($"Exception in function GetPolicyAutofaqFunction -> { ex.GetBaseException().Message }");
+                log?.Error($"Exception in function GetPolicyAutofaqFunction -> { ex.GetBaseException().Message }");
                 
                 // bubble up exception, so that function handler can perform common error handling
                 throw;
