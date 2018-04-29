@@ -1,5 +1,5 @@
-﻿using InsurerApis.Common.Functions;
-using InsurerApis.GetPolicy.Models;
+﻿using InsuranceApis.Common.Functions;
+using InsuranceApis.GetPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace InsurerApis.GetPolicy.Functions
+namespace InsuranceApis.GetPolicy.Functions
 {
     public class GetPolicyFunction : IFunction
     {

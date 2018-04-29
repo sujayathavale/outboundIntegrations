@@ -3,14 +3,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using InsurerApis.Common.Functions;
-using InsurerApis.GetPolicy.Models;
-using InsurerApis.GetPolicy.Modules;
+using InsuranceApis.Common.Functions;
+using InsuranceApis.GetPolicy.Models;
+using InsuranceApis.GetPolicy.Modules;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace InsurerApis.GetPolicy.Handlers
+namespace InsuranceApis.GetPolicy.Handlers
 {
     public static class GetPolicyHandler
     {

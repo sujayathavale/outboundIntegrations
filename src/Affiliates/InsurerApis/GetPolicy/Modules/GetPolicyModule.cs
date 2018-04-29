@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using InsurerApis.Common.Functions;
-using InsurerApis.GetPolicy.Functions;
+using InsuranceApis.Common.Functions;
+using InsuranceApis.GetPolicy.Functions;
 using System.Net.Http;
 
-namespace InsurerApis.GetPolicy.Modules
+namespace InsuranceApis.GetPolicy.Modules
 {
     /// <summary>
     /// Adds components and dependencies for GetPolicy function

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InsurerApis.GetPolicy.Models
+namespace InsuranceApis.GetPolicy.Models
 {
     public class GetPolicyFunctionModel
     {

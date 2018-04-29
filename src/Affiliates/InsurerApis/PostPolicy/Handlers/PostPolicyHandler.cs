@@ -3,15 +3,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using InsurerApis.Common.Functions;
-using InsurerApis.GetPolicy.Models;
-using InsurerApis.PostPolicy.Models;
-using InsurerApis.PostPolicy.Modules;
+using InsuranceApis.Common.Functions;
+using InsuranceApis.GetPolicy.Models;
+using InsuranceApis.PostPolicy.Models;
+using InsuranceApis.PostPolicy.Modules;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 
-namespace InsurerApis.PostPolicy.Handlers
+namespace InsuranceApis.PostPolicy.Handlers
 {
     public static class PostPolicyHandler
     {

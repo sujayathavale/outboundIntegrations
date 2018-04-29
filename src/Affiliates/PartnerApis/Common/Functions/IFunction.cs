@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.WebJobs.Host;
 using System.Threading.Tasks;
 
-namespace InsuranceApis.Common.Functions
+namespace AffiliatesApis.Common.Functions
 {
     public interface IFunction
     {

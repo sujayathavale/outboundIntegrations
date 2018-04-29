@@ -1,14 +1,14 @@
 ﻿using Autofac;
-using InsurerApis.Common.Functions;
-using InsurerApis.PostPolicy.Functions;
-using InsurerApis.PostPolicy.Models;
+using InsuranceApis.Common.Functions;
+using InsuranceApis.PostPolicy.Functions;
+using InsuranceApis.PostPolicy.Models;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.Caching;
 
 
-namespace InsurerApis.PostPolicy.Modules
+namespace InsuranceApis.PostPolicy.Modules
 {
     public class PostPolicyModule : Module
     {

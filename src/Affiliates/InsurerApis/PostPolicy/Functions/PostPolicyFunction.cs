@@ -1,5 +1,5 @@
-﻿using InsurerApis.Common.Functions;
-using InsurerApis.PostPolicy.Models;
+﻿using InsuranceApis.Common.Functions;
+using InsuranceApis.PostPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsurerApis.PostPolicy.Functions
+namespace InsuranceApis.PostPolicy.Functions
 {
     public class PostPolicyFunction : IFunction
     {

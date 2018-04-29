@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsurerApis.PostPolicy.Models
+namespace InsuranceApis.PostPolicy.Models
 {
     public class PostPolicySettings
     {

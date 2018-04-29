@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.WebJobs.Host;
 
-namespace InsuranceApis.Common.Functions
+namespace AffiliatesApis.Common.Functions
 {
     public interface IFunctionActivator
     {

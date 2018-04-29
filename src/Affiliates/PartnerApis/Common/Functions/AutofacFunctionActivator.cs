@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace InsuranceApis.Common.Functions
+namespace AffiliatesApis.Common.Functions
 {
     public class AutofacFunctionActivator : IFunctionActivator
     {
