@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Extensions.DocumentDB</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration">
+            <summary>
+            Defines the configuration options for the DocumentDB binding.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration.#ctor">
+            <summary>
+            Constructs a new instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration.ConnectionString">
+            <summary>
+            Gets or sets the DocumentDB connection string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration.Initialize(Microsoft.Azure.WebJobs.Host.Config.ExtensionConfigContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.DocumentDB.Config.DocumentDBConnectionString">
+            <summary>
+            A strongly-typed DocumentDB connection string. DocumentClient does not currently
+            support connection strings so we are using the base DbConnectionStringBuilder to 
+            perform the parsing for us. When it is handled by DocumentClient itself, we'll remove
+            this class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBUtility.RetryAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Int32,System.Net.HttpStatusCode[])">
+            <summary>
+            Execute the function with retries on throttle.
+            </summary>
+            <typeparam name="T">The type of return value from the execution.</typeparam>
+            <param name="function">The function to execute.</param>
+            <param name="maxRetries">The maximum number of times to retry if the request is throttled.</param>
+            <param name="codesToIgnore">Status codes, other than 429, to ignore. If one of these status codes is returned, the method will return the default value of T.</param>
+            <returns>The response from the execution.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService">
+            <summary>
+            An abstraction layer for communicating with a DocumentDB account.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.CreateDatabaseAsync(Microsoft.Azure.Documents.Database)">
+            <summary>
+            Creates the specified <see cref="T:Microsoft.Azure.Documents.Database"/>.
+            </summary>
+            <param name="database">The <see cref="T:Microsoft.Azure.Documents.Database"/> to create.</param>
+            <returns>The task object representing the service response for the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.CreateDocumentCollectionAsync(System.Uri,Microsoft.Azure.Documents.DocumentCollection,Microsoft.Azure.Documents.Client.RequestOptions)">
+            <summary>
+            Creates the specified <see cref="T:Microsoft.Azure.Documents.DocumentCollection"/>.
+            </summary>
+            <param name="databaseUri">The self-link of the database to create the collection in.</param>
+            <param name="documentCollection">The <see cref="T:Microsoft.Azure.Documents.DocumentCollection"/> to create.</param>
+            <param name="options">The <see cref="T:Microsoft.Azure.Documents.Client.RequestOptions"/> for the request.</param>
+            <returns>The task object representing the service response for the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.UpsertDocumentAsync(System.Uri,System.Object)">
+            <summary>
+            Inserts or replaces a document.
+            </summary>
+            <param name="documentCollectionUri">The self-link of the collection to create the document in.</param>
+            <param name="document">The document object.</param>
+            <returns>The task object representing the service response for the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.ReadDocumentAsync(System.Uri,Microsoft.Azure.Documents.Client.RequestOptions)">
+            <summary>
+            Reads a document.
+            </summary>
+            <param name="documentUri">The self-link of the document.</param>
+            <param name="options">The <see cref="T:Microsoft.Azure.Documents.Client.RequestOptions"/> for the request.</param>
+            <returns>The task object representing the service response for the asynchronous operation.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.ReplaceDocumentAsync(System.Uri,System.Object)">
+            <summary>
+            Replaces a document.
+            </summary>
+            <param name="documentUri">The self-link of the collection to create the document in.</param>
+            <param name="document">The <see cref="T:Microsoft.Azure.Documents.Document"/> to replace.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.ExecuteNextAsync``1(System.Uri,Microsoft.Azure.Documents.SqlQuerySpec,System.String)">
+            <summary>
+            Queries a collection.
+            </summary>
+            <param name="documentCollectionUri">The self-link of the collection to query.</param>
+            <param name="sqlSpec">The SQL expression to query.</param>
+            <param name="continuation">The continuation token.</param>
+            <returns>The response from the call to DocumentDB</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.DocumentDB.IDocumentDBService.GetClient">
+            <summary>
+            Returns the underlying <see cref="T:Microsoft.Azure.Documents.Client.DocumentClient"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.DocumentDBJobHostConfigurationExtensions">
+            <summary>
+            Extension methods for DocumentDB integration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.DocumentDBJobHostConfigurationExtensions.UseDocumentDB(Microsoft.Azure.WebJobs.JobHostConfiguration,Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration)">
+            <summary>
+            Enables use of the DocumentDB extensions
+            </summary>
+            <param name="config">The <see cref="T:Microsoft.Azure.WebJobs.JobHostConfiguration"/> to configure.</param>
+            <param name="documentDBConfig">The <see cref="T:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration"/> to use.</param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.DocumentDBAttribute">
+            <summary>
+            Attribute used to bind to an Azure DocumentDB collection.
+            </summary>
+            <remarks>
+            The method parameter type can be one of the following:
+            <list type="bullet">
+            <item><description><see cref="T:Microsoft.Azure.WebJobs.ICollector`1"/></description></item>
+            <item><description><see cref="T:Microsoft.Azure.WebJobs.IAsyncCollector`1"/></description></item>
+            <item><description>out T</description></item>
+            <item><description>out T[]</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.DocumentDBAttribute.#ctor">
+            <summary>
+            Constructs a new instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.DocumentDBAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Constructs a new instance.
+            </summary>
+            <param name="databaseName">The DocumentDB database name.</param>
+            <param name="collectionName">The DocumentDB collection name.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.DatabaseName">
+            <summary>
+            The name of the database to which the parameter applies.        
+            May include binding parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.CollectionName">
+            <summary>
+            The name of the collection to which the parameter applies. 
+            May include binding parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.CreateIfNotExists">
+            <summary>
+            Optional.
+            Only applies to output bindings.
+            If true, the database and collection will be automatically created if they do not exist.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.ConnectionStringSetting">
+            <summary>
+            Optional. A string value indicating the app setting to use as the DocumentDB connection string, if different
+            than the one specified in the <see cref="T:Microsoft.Azure.WebJobs.Extensions.DocumentDB.DocumentDBConfiguration"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.Id">
+            <summary>
+            Optional. The Id of the document to retrieve from the collection.
+            May include binding parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.PartitionKey">
+            <summary>
+            Optional.
+            When specified on an output binding and <see cref="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.CreateIfNotExists"/> is true, defines the partition key 
+            path for the created collection.
+            When specified on an input binding, specifies the partition key value for the lookup.
+            May include binding parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.CollectionThroughput">
+            <summary>
+            Optional.
+            When specified on an output binding and <see cref="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.CreateIfNotExists"/> is true, defines the throughput of the created
+            collection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.DocumentDBAttribute.SqlQuery">
+            <summary>
+            Optional.
+            When specified on an input binding using an <see cref="T:System.Collections.Generic.IEnumerable`1"/>, defines the query to run against the collection. 
+            May include binding parameters.
+            </summary>
+        </member>
+    </members>
+</doc>

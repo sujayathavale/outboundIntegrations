@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Logging.ApplicationInsights</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory">
+            <summary>
+            Creates a <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/> for use by the <see cref="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ApplicationInsightsLogger"/>. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.#ctor(System.String,Microsoft.ApplicationInsights.WindowsServer.Channel.Implementation.SamplingPercentageEstimatorSettings,System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean})">
+            <summary>
+            Instantiates an instance.
+            </summary>
+            <param name="instrumentationKey">The Application Insights instrumentation key.</param>
+            <param name="samplingSettings">The <see cref="T:Microsoft.ApplicationInsights.WindowsServer.Channel.Implementation.SamplingPercentageEstimatorSettings"/> to use for configuring adaptive sampling. If null, sampling is disabled.</param>
+            <param name="filter"></param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.Create">
+            <summary>
+            Creates a <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/>. 
+            </summary>
+            <returns>The <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.CreateTelemetryChannel">
+            <summary>
+            Creates the <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetryChannel"/> to be used by the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/>. If this channel
+            implements <see cref="T:Microsoft.ApplicationInsights.Extensibility.ITelemetryModule"/> as well, <see cref="M:Microsoft.ApplicationInsights.Extensibility.ITelemetryModule.Initialize(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration)"/> will
+            automatically be called.
+            </summary>
+            <returns>The <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetryChannel"/></returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.CreateQuickPulseTelemetryModule">
+            <summary>
+            Creates the <see cref="T:Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse.QuickPulseTelemetryModule"/> to be used by the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/>.
+            </summary>
+            <returns>The <see cref="T:Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse.QuickPulseTelemetryModule"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.DefaultTelemetryClientFactory.Dispose(System.Boolean)">
+            <summary>
+            Disposes the instance.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ITelemetryClientFactory">
+            <summary>
+            Interface for creating <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/> instances.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ITelemetryClientFactory.Create">
+            <summary>
+            Creates a <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/>.
+            </summary>
+            <returns>The <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/>. </returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.WebJobsRoleEnvironmentTelemetryInitializer">
+            <summary>
+            A telemetry initializer that will gather Azure Web App Role Environment context information.
+            </summary>    
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.WebJobsRoleEnvironmentTelemetryInitializer.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)">
+            <summary>
+            Initializes <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry" /> device context.
+            </summary>
+            <param name="telemetry">The telemetry to initialize.</param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.WebJobsRoleEnvironmentTelemetryInitializer.GetAzureWebsiteUniqueSlotName">
+            <summary>
+            Gets a value that uniquely identifies the site and slot.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Logging.Sanitizer">
+            <summary>
+            Utility class for sanitizing logging strings.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Logging.Sanitizer.Sanitize(System.String)">
+            <summary>
+            Removes well-known credential strings from strings.
+            </summary>
+            <param name="input">The string to sanitize.</param>
+            <returns>The sanitized string.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Logging.ApplicationInsightsLoggerExtensions">
+            <summary>
+            Extensions for adding the <see cref="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider"/> to an <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/>. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.ApplicationInsightsLoggerExtensions.AddApplicationInsights(Microsoft.Extensions.Logging.ILoggerFactory,System.String,System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean})">
+            <summary>
+            Registers an <see cref="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider"/> with an <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/>.
+            </summary>
+            <param name="loggerFactory">The factory.</param>
+            <param name="instrumentationKey">The Application Insights instrumentation key.</param>
+            <param name="filter">A filter that returns true if a message with the specified <see cref="T:Microsoft.Extensions.Logging.LogLevel"/>
+            and category should be logged. You can use <see cref="M:Microsoft.Azure.WebJobs.Logging.LogCategoryFilter.Filter(System.String,Microsoft.Extensions.Logging.LogLevel)"/>
+            or write a custom filter.</param>
+            <returns>A <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> for chaining additional operations.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.ApplicationInsightsLoggerExtensions.AddApplicationInsights(Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ITelemetryClientFactory)">
+            <summary>
+            Registers an <see cref="T:Microsoft.Azure.WebJobs.Logging.ApplicationInsights.ApplicationInsightsLoggerProvider"/> with an <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/>.
+            </summary>
+            <param name="loggerFactory">The factory.</param>        
+            <param name="telemetryClientFactory">The factory to use when creating the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient"/> </param>
+            <returns>A <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> for chaining additional operations.</returns>
+        </member>
+    </members>
+</doc>

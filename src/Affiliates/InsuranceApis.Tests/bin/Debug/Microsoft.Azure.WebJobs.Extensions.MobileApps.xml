@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Extensions.MobileApps</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileServiceApiKeyHandler">
+            <summary>
+            A <see cref="T:System.Net.Http.DelegatingHandler"/> that adds a ZUMO-API-KEY header to every request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration">
+            <summary>
+            Defines the configuration options for the motile table binding.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration.#ctor">
+            <summary>
+            Constructs a new instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration.ApiKey">
+            <summary>
+            Gets or sets the ApiKey to use with the Mobile App.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration.MobileAppUri">
+            <summary>
+            Gets or sets the mobile app URI.
+            </summary>      
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration.Initialize(Microsoft.Azure.WebJobs.Host.Config.ExtensionConfigContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppUtility.IsValidItemType(System.Type,System.String)">
+            <summary>
+            Evaluates whether the specified type is valid for use with mobile tables.
+            If the type is <see cref="T:Newtonsoft.Json.Linq.JObject"/>, then then a table name is required.
+            If the type is not <see cref="T:Newtonsoft.Json.Linq.JObject"/>, then it must contain a single public
+            string 'Id' property.
+            </summary>
+            <param name="itemType">The type to evaluate.</param>
+            <param name="tableName">The table name.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.MobileTableAttribute">
+            <summary>
+            Attribute used to binds a parameter to an mobile table type.
+            </summary>
+            <remarks>
+            The method parameter type can be one of the following:
+            <list type="bullet">
+            <item><description><see cref="T:Microsoft.Azure.WebJobs.ICollector`1"/>, where T is either <see cref="T:Newtonsoft.Json.Linq.JObject"/> or any type with a public string Id property.</description></item>
+            <item><description><see cref="T:Microsoft.Azure.WebJobs.IAsyncCollector`1"/>, where T is either <see cref="T:Newtonsoft.Json.Linq.JObject"/> or any type with a public string Id property.</description></item>
+            <item><description>out <see cref="T:Newtonsoft.Json.Linq.JObject"/></description></item>
+            <item><description>out <see cref="T:Newtonsoft.Json.Linq.JObject"/>[]</description></item>
+            <item><description>out T, where T is any Type with a public string Id property</description></item>
+            <item><description>out T[], where T is any Type with a public string Id property</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.MobileTableAttribute.TableName">
+            <summary>
+            The name of the table to which the parameter applies.
+            Required if using a <see cref="T:Newtonsoft.Json.Linq.JObject"/> parameter; otherwise the table name is resolved
+            by the underlying <see cref="T:Microsoft.WindowsAzure.MobileServices.MobileServiceClient"/> based on the item type.
+            May include binding parameters.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.MobileTableAttribute.Id">
+            <summary>
+            The Id of the item to retrieve from the table.
+            May include binding parameters
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.MobileTableAttribute.MobileAppUriSetting">
+            <summary>
+            Optional. A string value indicating the app setting to use as the Azure Mobile App Uri, if different
+            than the one specified in the <see cref="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.MobileTableAttribute.ApiKeySetting">
+            <summary>
+            Optional. A string value indicating the app setting to use as the Azure Mobile App Api Key, if different
+            than the one specified in the <see cref="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration"/>.
+            This value affects this parameter as follows:
+            - If it is null, the ApiKey value from <see cref="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration"/> is used.
+            - If it is equal to string.Empty, no Api Key is used.
+            - Otherwise, this value is used to indicate the app setting that contains the Azure Mobile App Api Key.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.MobileAppsJobHostConfigurationExtensions">
+            <summary>
+            Extension methods for Mobile App integration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.MobileAppsJobHostConfigurationExtensions.UseMobileApps(Microsoft.Azure.WebJobs.JobHostConfiguration,Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration)">
+            <summary>
+            Enables use of the Mobile App extensions.
+            </summary>
+            <param name="config">The <see cref="T:Microsoft.Azure.WebJobs.JobHostConfiguration"/> to configure.</param>
+            <param name="mobileAppsConfig">The <see cref="T:Microsoft.Azure.WebJobs.Extensions.MobileApps.MobileAppsConfiguration"/> to use.</param>
+        </member>
+    </members>
+</doc>

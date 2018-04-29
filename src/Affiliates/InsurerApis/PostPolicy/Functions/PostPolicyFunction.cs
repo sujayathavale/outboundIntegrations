@@ -1,6 +1,7 @@
 ﻿using InsuranceApis.Common.Functions;
 using InsuranceApis.PostPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using System.Runtime.Caching;
@@ -21,13 +22,13 @@ namespace InsuranceApis.PostPolicy.Functions
             _postPolicySettings = postPolicySettings;
         }
 
-        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
+        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, ILogger log)
         {
             object result = null;
 
             try
             {
-                log?.Info("PostPolicyFunction invoked.");
+                log?.LogInformation("PostPolicyFunction invoked.");
 
                 var nextPolicyState = "Policy.Created";
 
@@ -38,11 +39,11 @@ namespace InsuranceApis.PostPolicy.Functions
                 if (cachedValue != null)
                 {
                     var currentPolicyState = (string)cachedValue;
-                    log.Info($"currentPolicyState = {currentPolicyState}");                    
+                    log.LogInformation($"currentPolicyState = {currentPolicyState}");                    
                     nextPolicyState = TransitionPolicyState(currentPolicyState);
                 }
 
-                log.Info($"nextPolicyState = {nextPolicyState}");
+                log.LogInformation($"nextPolicyState = {nextPolicyState}");
 
                 if (nextPolicyState == "Policy.Created")
                 {
@@ -62,7 +63,7 @@ namespace InsuranceApis.PostPolicy.Functions
             catch (Exception ex)
             {
                 // log error message
-                log?.Error($"Exception in function PostPolicyFunction -> { ex.GetBaseException().Message }");
+                log?.LogError($"Exception in function PostPolicyFunction -> { ex.GetBaseException().Message }");
 
                 // bubble up exception, so that function handler can perform common error handling
                 throw;

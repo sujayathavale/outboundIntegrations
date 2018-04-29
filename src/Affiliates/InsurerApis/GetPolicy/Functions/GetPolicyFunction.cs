@@ -1,5 +1,6 @@
 ﻿using InsuranceApis.Common.Functions;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -12,15 +13,18 @@ namespace InsuranceApis.GetPolicy.Functions
         {            
         }
 
-        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
+        public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, ILogger log)
         {
             object result = null;
 
             try
             {
-                log?.Info("GetPolicyFunction invoked.");
+                log?.LogInformation("GetPolicyFunction invoked.");
 
                 var model = payload as Models.GetPolicyFunctionModel;
+
+                if (model is null)
+                    throw new ArgumentException("TPayload must be of type GetPolicyFunctionModel");
 
                // some static representation for the policy
                result = await Task.FromResult(new[]
@@ -46,7 +50,7 @@ namespace InsuranceApis.GetPolicy.Functions
             catch (Exception ex)
             {
                 // log error message
-                log?.Error($"Exception in function GetPolicyFunction -> { ex.GetBaseException().Message }");
+                log?.LogError($"Exception in function GetPolicyFunction -> { ex.GetBaseException().Message }");
                 
                 // bubble up exception, so that function handler can perform common error handling
                 throw;

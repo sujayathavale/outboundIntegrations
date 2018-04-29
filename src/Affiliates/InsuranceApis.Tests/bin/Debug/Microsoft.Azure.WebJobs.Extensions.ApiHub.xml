@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Azure.WebJobs.Extensions.ApiHub</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.ConnectionFactory">
+            <summary>
+            Represents a factory to create ApiHub connections.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.ConnectionFactory.#ctor">
+            <summary>
+            Constructs a new instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.ConnectionFactory.Default">
+            <summary>
+            Gets or sets the default ConnectionFactory instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.ConnectionFactory.CreateConnection(System.String)">
+            <summary>
+            Creates a connection.
+            </summary>
+            <param name="key">The key of the configuration setting 
+            that specifies the connection string.</param>
+            <returns>The connection created.</returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileTriggerStrategy`1">
+            <summary>
+            File Triggers implement this.
+            </summary>
+            <typeparam name="TFile"></typeparam>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileTriggerStrategy`1.GetPath(`0)">
+            <summary>
+            Get the path from the file. 
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileTriggerStrategy`1.GetStaticBindingContract(System.Collections.Generic.IDictionary{System.String,System.Type})">
+            <summary>
+            Get the binding contract. Mutable so that we can add to this. 
+            </summary>
+            <param name="contract"></param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileTriggerStrategy`1.GetRuntimeBindingContract(`0,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Add runtime information to the contract. 
+            </summary>
+            <param name="file"></param>
+            <param name="contract"></param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.GenericStreamBindingProvider`2">
+            <summary>
+            Generic Stream provider
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <typeparam name="TFile"></typeparam>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileAttribute">
+            <summary>
+            Interface that defines the methods for working with file
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileAttribute.Path">
+            <summary>
+            Path with resolution. It allows set so we can update this attribute with resolved parameters. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileAttribute.Access">
+            <summary>
+            Gets the file access
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileStreamProvider">
+            <summary>
+            Interface that defines methods needed to work with FileStream
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileStreamProvider.OpenReadStreamAsync">
+            <summary>
+            Get a stream that reads from the source.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.IFileStreamProvider.OpenWriteStreamAsync">
+            <summary>
+            Stream and a "Completion" function to be called when finished writing to the stream.
+            That can be used to flush results.
+            Technically, the a derived stream could override Close() to call OnComplete, but that's 
+            hard for callers to implement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.ApiHubTableAttribute">
+            <summary>
+            Attribute used to bind a parameter to an ApiHub table or entity.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubTableAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new instance of this class.
+            </summary>
+            <param name="connection">The key of the configuration setting that 
+            specifies the connection string.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubTableAttribute.Connection">
+            <summary>
+            Gets the key of the configuration setting that specifies the connection string.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubTableAttribute.DataSetName">
+            <summary>
+            Gets or sets the data set name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubTableAttribute.TableName">
+            <summary>
+            Gets or sets the table name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubTableAttribute.EntityId">
+            <summary>
+            Gets or sets the entity identifier.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.ApiHubFileAttribute">
+            <summary>
+            Attribute that points to the file on SAAS file provider
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubFileAttribute.#ctor(System.String,System.String,System.IO.FileAccess)">
+            <summary>
+            Create an instance of an attribute that points to the file on SAAS file provider
+            </summary>
+            <param name="connectionStringSetting">App settings key name that have the connections string</param>
+            <param name="path">Relative path to the file <example>/folder/subfolder/file.txt</example> </param>
+            <param name="access">Type of access requests <seealso cref="T:System.IO.FileAccess"/></param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubFileAttribute.ConnectionStringSetting">
+            <summary>
+            Gets or sets app settings key name that have the connections string to the SAAS provider
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubFileAttribute.Access">
+            <summary>
+            Type of access requests <seealso cref="T:System.IO.FileAccess"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubFileAttribute.Path">
+            <summary>
+            Relative path to the file <example>/folder/subfolder/file.txt</example> 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.ApiHubFileTriggerAttribute">
+            <summary>
+            Attribute that points to the file on SAAS file trigger
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubFileTriggerAttribute.#ctor(System.String,System.String,Microsoft.Azure.ApiHub.FileWatcherType,System.Int32)">
+            <summary>
+            Attribute used to bind a parameter to a SAAS file
+            </summary>
+            <param name="connectionStringSetting">App settings key name that have the connections string</param>
+            <param name="path">Relative path to the file <example>/folder/subfolder/file.txt</example></param>
+            <param name="fileWatcherType">Type of the file watcher.</param>
+            <param name="pollIntervalInSeconds">The poll interval in seconds.</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubFileTriggerAttribute.PollIntervalInSeconds">
+            <summary>
+            Gets or sets the poll interval in seconds.
+            </summary>
+            <value>
+            The poll interval in seconds.
+            </value>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubFileTriggerAttribute.FileWatcherType">
+            <summary>
+            Gets or sets the type of the file watcher. Default is 'Created'.
+            </summary>
+            <value>
+            The type of the file watcher.
+            </value>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.ApiHubConfiguration">
+            <summary>
+            Defines the configuration options for the ApiHub binding.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubConfiguration.#ctor(Microsoft.Azure.WebJobs.Extensions.ApiHub.Common.ConnectionFactory)">
+            <summary>
+            Creates a new instance of this class.
+            </summary>
+            <param name="connectionFactory">The factory used to create connections</param>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubConfiguration.Logger">
+            <summary>
+            Gets or sets the logger.
+            </summary>
+            <value>
+            The logger.
+            </value>
+        </member>
+        <member name="P:Microsoft.Azure.WebJobs.ApiHubConfiguration.MaxFunctionExecutionRetryCount">
+            <summary>
+            Gets or sets the number of times to try processing a file before moving it to the poison queue (where
+            possible).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubConfiguration.Initialize(Microsoft.Azure.WebJobs.Host.Config.ExtensionConfigContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubConfiguration.AddConnection(System.String,System.String)">
+            <summary>
+            Adds a connection to the configuration
+            </summary>
+            <param name="settingName">App settings settingName name that have the connections string</param>
+            <param name="connectionString">Connection string to access SAAS via ApiHub. <seealso cref="M:Microsoft.Azure.WebJobs.ApiHubJobHostConfigurationExtensions.GetApiHubProviderConnectionStringAsync(System.String,System.String,System.String,System.String)" /></param>
+        </member>
+        <member name="T:Microsoft.Azure.WebJobs.ApiHubJobHostConfigurationExtensions">
+            <summary>
+            Helper extensions for ApiHub configuration
+            </summary>
+            <summary>
+            Helper file to work with APIHub
+            </summary>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubJobHostConfigurationExtensions.UseApiHub(Microsoft.Azure.WebJobs.JobHostConfiguration,Microsoft.Azure.WebJobs.ApiHubConfiguration)">
+            <summary>
+            Add ApiHub configuration to <see cref="T:Microsoft.Azure.WebJobs.JobHostConfiguration"/>
+            </summary>
+            <param name="config">current <see cref="T:Microsoft.Azure.WebJobs.JobHostConfiguration"/></param>
+            <param name="apiHubConfiguration">Instance of <see cref="T:Microsoft.Azure.WebJobs.ApiHubConfiguration"/></param>
+        </member>
+        <member name="M:Microsoft.Azure.WebJobs.ApiHubJobHostConfigurationExtensions.GetApiHubProviderConnectionStringAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Obtain the connection string from Azure App Service.
+            </summary>
+            <param name="apiName">Name of the API.</param>
+            <param name="subscriptionId">Azure subscription Id</param>
+            <param name="location">Azure location to be used.</param>
+            <param name="azureAdToken">Azure AD token to be used.</param>
+            <returns>Connection string to be saved in the app setting and used for runtime calls</returns>
+        </member>
+    </members>
+</doc>

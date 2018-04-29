@@ -8,6 +8,7 @@ using InsuranceApis.PostPolicy.Modules;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 
 namespace InsuranceApis.PostPolicy.Handlers
 {
@@ -18,7 +19,7 @@ namespace InsuranceApis.PostPolicy.Handlers
         [FunctionName("PostPolicyHandler")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "api/policy/{policyId:long}")]HttpRequestMessage req,
-            TraceWriter log)
+            ILogger log)
         {
             try
             {
@@ -29,7 +30,7 @@ namespace InsuranceApis.PostPolicy.Handlers
             }
             catch (Exception ex)
             {
-                log?.Error($"Exception in function GetPolicyHandler -> { ex.GetBaseException().Message }");
+                log?.LogError($"Exception in function GetPolicyHandler -> { ex.GetBaseException().Message }");
             }
 
             return req.CreateResponse(HttpStatusCode.InternalServerError);
