@@ -132,8 +132,7 @@ namespace InsuranceApis.PostPolicy.Functions
             };
 
             var requestUrl = _postPolicySettings.PolicyCreated.Uri;
-
-            _httpClient?.DefaultRequestHeaders.Accept.Clear();
+            _httpClient?.DefaultRequestHeaders.Clear();
             _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", _postPolicySettings.PolicyCreated.SaSKey);
 
             using (var message = await this._httpClient?.PostAsJsonAsync(requestUrl, body))
@@ -168,8 +167,8 @@ namespace InsuranceApis.PostPolicy.Functions
                     }
             };
 
-            var requestUrl = _postPolicySettings.PolicyRefunded.Uri;
-            _httpClient?.DefaultRequestHeaders.Accept.Clear();
+            var requestUrl = _postPolicySettings.PolicyRefunded.Uri;           
+            _httpClient?.DefaultRequestHeaders.Clear();
             _httpClient?.DefaultRequestHeaders.Add("aeg-sas-key", _postPolicySettings.PolicyRefunded.SaSKey);
 
             using (var message = await this._httpClient?.PostAsJsonAsync(requestUrl, body))
