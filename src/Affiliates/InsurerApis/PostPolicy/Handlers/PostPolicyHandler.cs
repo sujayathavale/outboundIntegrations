@@ -1,10 +1,8 @@
 using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using InsuranceApis.Common.Functions;
-using InsuranceApis.GetPolicy.Models;
 using InsuranceApis.PostPolicy.Models;
 using InsuranceApis.PostPolicy.Modules;
 using Microsoft.Azure.WebJobs;

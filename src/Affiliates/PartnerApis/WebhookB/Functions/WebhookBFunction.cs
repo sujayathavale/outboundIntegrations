@@ -1,12 +1,12 @@
 ﻿using AffiliatesApis.Common.Functions;
-using AffiliatesApis.WebhookA.Models;
+using AffiliatesApis.WebhookB.Models;
 using Microsoft.Azure.WebJobs.Host;
 using System;
 using System.Threading.Tasks;
 
-namespace AffiliatesApis.WebhookA.Functions
+namespace AffiliatesApis.WebhookB.Functions
 {
-    public class WebhookAFunction : IFunction
+    public class WebhookBFunction : IFunction
     {
         public async Task<TOutput> InvokeAsync<TPayload, TOutput>(TPayload payload, TraceWriter log)
         {
@@ -14,11 +14,11 @@ namespace AffiliatesApis.WebhookA.Functions
 
             try
             {
-                log?.Info("WebhookAFunction invoked.");
+                log?.Info("WebhookBFunction invoked.");
 
-                var eventGridEvent = (payload as WebhookAFunctionModel)?.EventPayload;
+                var eventGridEvent = (payload as WebhookBFunctionModel)?.EventPayload;
 
-                log?.Info($"Webhook A Fired" +
+                log?.Info($"Webhook B Fired" +
                  $"\n\tId:{eventGridEvent?.Id}" +
                  $"\n\tTopic:{eventGridEvent?.Topic}" +
                  $"\n\tSubject:{eventGridEvent?.Subject}" +
@@ -31,7 +31,7 @@ namespace AffiliatesApis.WebhookA.Functions
             catch (Exception ex)
             {
                 // log error message
-                log?.Error($"Exception in function WebhookAFunction -> { ex.GetBaseException().Message }");
+                log?.Error($"Exception in function WebhookBFunction -> { ex.GetBaseException().Message }");
 
                 // bubble up exception, so that function handler can perform common error handling
                 throw;

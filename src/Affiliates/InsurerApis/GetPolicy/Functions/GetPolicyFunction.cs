@@ -1,11 +1,6 @@
 ﻿using InsuranceApis.Common.Functions;
-using InsuranceApis.GetPolicy.Models;
 using Microsoft.Azure.WebJobs.Host;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Azure.WebJobs.Extensions.EventGrid;
 
-namespace AffiliatesApis.WebhookA.Models
+namespace AffiliatesApis.WebhookB.Models
 {
-    public class WebhookAFunctionModel
+    public class WebhookBFunctionModel
     {
         public EventGridEvent EventPayload { get; set; }
     }
